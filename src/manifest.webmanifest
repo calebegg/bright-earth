@@ -1,0 +1,16 @@
+{
+  "name": "Bright Earth",
+  "short_name": "Bright Earth",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff"
+}

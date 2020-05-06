@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200;400&family=Roboto:wght@400');
+
+html {
+  font-size: min(max(3vw, 12px), calc(600px / 100 * 3));
+}
+
+body {
+  max-width: 600px;
+  margin: auto;
+  font-family: Roboto, sans-serif;
+  color: #333;
+  margin-top: 0;
+}
+
+main {
+  margin: 0 5px;
+}
+
+.current-conditions {
+  font-family: Raleway, sans-serif;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+}
+
+.current-conditions .temp {
+  font-weight: 200;
+  font-size: 4.5rem;
+}
+
+.current-conditions .metadata {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-align: right;
+}
+
+canvas {
+  border: solid rgba(0, 0, 0, 0.075) 1px;
+  width: calc(100% - 2px);
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+}
+
+th,
+td {
+  padding: 0;
+  border-bottom: solid rgba(0, 0, 0, 0.075) 1px;
+}
+
+col.temp {
+  border-left: solid rgba(0, 0, 0, 0.075) 1px;
+}
+
+span.temp-label {
+  display: inline-block;
+  background: #ddd;
+  color: black;
+  padding: 3px;
+  position: relative;
+  border-radius: 3px;
+}
+
+span.temp-label.high {
+  background: rgb(175, 41, 0);
+  color: white;
+}
+span.temp-label.low {
+  background: rgb(0, 69, 219);
+  color: white;
+}
+
+footer {
+  font-style: italic;
+  text-align: center;
+}
