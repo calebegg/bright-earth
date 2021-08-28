@@ -19,6 +19,9 @@ import React from 'react';
 import { render } from 'react-dom';
 import { App } from './App';
 
-navigator.serviceWorker.register('./serviceworker.ts', { scope: '/' });
+navigator.serviceWorker.register(
+  new URL('./serviceworker.ts', import.meta.url),
+  { scope: '/', type: 'module' },
+);
 
 render(<App />, document.querySelector('main'));

@@ -15,24 +15,18 @@
  * limitations under the License.
  */
 
-importScripts(
-  'https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js',
-);
+import { setDefaultHandler, registerRoute } from 'workbox-routing';
+import {
+  NetworkFirst,
+  StaleWhileRevalidate,
+  CacheFirst,
+} from 'workbox-strategies';
 
-workbox.routing.setDefaultHandler(new workbox.strategies.NetworkFirst());
+setDefaultHandler(new NetworkFirst());
 
-workbox.routing.registerRoute(
-  '/',
-  new workbox.strategies.StaleWhileRevalidate(),
-);
+registerRoute('/', new StaleWhileRevalidate());
 
-workbox.routing.registerRoute(
-  /https:\/\/forecast.weather.gov\/.*/,
-  new workbox.strategies.NetworkFirst(),
-);
+registerRoute(/https:\/\/forecast.weather.gov\/.*/, new NetworkFirst());
 
 // Parcel hashed resources
-workbox.routing.registerRoute(
-  /\.[0-9a-f]{8}\./,
-  new workbox.strategies.CacheFirst(),
-);
+registerRoute(/\.[0-9a-f]{8}\./, new CacheFirst());
