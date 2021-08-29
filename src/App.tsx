@@ -28,9 +28,19 @@ export function App() {
   useEffect(() => {
     let canceled = false;
     (async () => {
-      const pos = await new Promise<Position>((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject);
-      });
+      let posFromUrl = new URL(location.href).searchParams.get('loc');
+      let pos: Position | null;
+      if (posFromUrl) {
+        const [latitude, longitude] = posFromUrl.split(',').map(v => Number(v));
+        pos = {
+          coords: { latitude, longitude } as Coordinates,
+          timestamp: Date.now(),
+        };
+      } else {
+        pos = await new Promise<Position>((resolve, reject) => {
+          navigator.geolocation.getCurrentPosition(resolve, reject);
+        });
+      }
       if (canceled) return;
       setPosition(pos);
       const weather = await fetchWeather(pos);

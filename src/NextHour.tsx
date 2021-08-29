@@ -23,11 +23,6 @@ const H = W / 4;
 const RETICLE_X = 15;
 const HOURS = 2;
 
-// From associated .gfw file
-const PIXEL = 0.00951288396661932;
-const UL_LAT = 43.4772877779874;
-const UL_LON = -75.7131071610884;
-
 export function NextHour({
   position,
   wind,
@@ -45,12 +40,30 @@ export function NextHour({
       const c = canvasRef.current!.getContext('2d')!;
       c.font = `${W / 45}px sans-serif`;
 
+      const { latitude: lat, longitude: lon } = position.coords;
+
       const radar = new Image();
       const radarPromise = new Promise((resolve, reject) => {
         radar.addEventListener('load', resolve);
         radar.addEventListener('error', reject);
       });
-      radar.src = `https://radar.weather.gov/ridge/RadarImg/N0R/OKX_N0R_0.gif`;
+      radar.crossOrigin = 'Anonymous';
+      radar.src =
+        'https://idpgis.ncep.noaa.gov/arcgis/services/NWS_Observations/radar_base_reflectivity/MapServer/WmsServer?' +
+        new URLSearchParams({
+          REQUEST: 'GetMap',
+          SERVICE: 'WMS',
+          VERSION: '1.3.0',
+          LAYERS: '1',
+          STYLES: 'default',
+          FORMAT: 'image/png',
+          TRANSPARENT: 'TRUE',
+          CRS: 'EPSG:4326',
+          BBOX: `${lat - 1},${lon - 1},${lat + 1},${lon + 1}`,
+          WIDTH: '256',
+          HEIGHT: '256',
+        });
+
       try {
         await radarPromise;
       } catch {
@@ -58,20 +71,19 @@ export function NextHour({
         return;
       }
       if (canceled) return;
-      const pixelLength = (wind.speed / 1.151 / 60 / PIXEL) * HOURS;
+
+      // This is suspicious
+      const pixelLength = (wind.speed / 1.151) * HOURS;
       const scale = W / pixelLength;
-      const centerX = (position.coords.longitude - UL_LON) / PIXEL;
-      const centerY = -(position.coords.latitude - UL_LAT) / PIXEL;
 
       c.imageSmoothingEnabled = false;
       c.translate(RETICLE_X, H / 2);
       c.scale(scale, scale);
       c.rotate((-wind.dir / 360 - 0.25) * TAU);
-      c.translate(-centerX, -centerY);
+      c.translate(-128, -128);
       c.drawImage(radar, 0, 0);
       c.resetTransform();
 
-      c.filter = 'blur(0)';
       c.strokeStyle = 'red';
       c.lineWidth = devicePixelRatio;
       c.strokeRect(RETICLE_X - 10, H / 2 - 10, 20, 20);
