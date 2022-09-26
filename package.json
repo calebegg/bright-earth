@@ -30,7 +30,7 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-react-hooks": "^4.0.0",
-    "firebase-tools": "^9.11.0",
+    "firebase-tools": "^9.23.3",
     "husky": "^6.0.0",
     "parcel": "^2.0.0-rc.0",
     "prettier": "^2.0.4",
