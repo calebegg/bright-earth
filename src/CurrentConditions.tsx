@@ -43,9 +43,7 @@ export function CurrentConditions({ weather }: { weather: Weather | null }) {
               })()
             : ''}
         </div>
-        <div>
-          Feels like: {weather?.current.feelsLike ?? '--'}°F
-        </div>
+        <div>Feels like: {weather?.current.feelsLike ?? '--'}°F</div>
       </div>
     </div>
   );

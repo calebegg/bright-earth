@@ -28,7 +28,7 @@ export function App() {
   useEffect(() => {
     let canceled = false;
     (async () => {
-      let posFromUrl = new URL(location.href).searchParams.get('loc');
+      const posFromUrl = new URL(location.href).searchParams.get('loc');
       let pos: GeolocationPosition | null;
       if (posFromUrl) {
         const [latitude, longitude] = posFromUrl.split(',').map(v => Number(v));
