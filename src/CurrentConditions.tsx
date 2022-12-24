@@ -58,6 +58,7 @@ export function CurrentConditions({ weather }: { weather: Weather | null }) {
                   `body=Find a suitable icon for ![](${weather.current.icon})` +
                   ' at https://fonts.google.com/icons'
                 }
+                target="_blank"
               >
                 <img src={weather?.current.icon} width="128" height="128" />
               </a>
