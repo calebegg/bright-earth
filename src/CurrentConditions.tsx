@@ -22,28 +22,48 @@ export function CurrentConditions({ weather }: { weather: Weather | null }) {
   return (
     <div className="current-conditions">
       <div className="temp">{weather?.current.temp ?? '--'}°</div>
-      <div className="metadata">
-        <strong>{weather?.current.desc ?? '--'}</strong>
-        <div>
-          Wind:{' '}
-          {'N,NNE,NE,ENE,E,ESE,SE,SSE,S,SSW,SW,WSW,W,WNW,NW,NNW,N'.split(',')[
-            Math.round((weather?.wind.dir ?? -1) / 22.5)
-          ] ?? '--'}
-          , {weather?.wind.speed ?? '--'} mph
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <div className="metadata">
+          <strong>{weather?.current.desc ?? '--'}</strong>
+          <div>
+            Wind:{' '}
+            {'N,NNE,NE,ENE,E,ESE,SE,SSE,S,SSW,SW,WSW,W,WNW,NW,NNW,N'.split(',')[
+              Math.round((weather?.wind.dir ?? -1) / 22.5)
+            ] ?? '--'}
+            , {weather?.wind.speed ?? '--'} mph
+          </div>
+          <div>
+            Dew point: {weather?.current.dewpoint ?? '--'}°F{' '}
+            {weather
+              ? (() => {
+                  if (weather.current.dewpoint < 50) return '';
+                  if (weather.current.dewpoint < 60) return '(humid)';
+                  if (weather.current.dewpoint < 65) return '(muggy)';
+                  if (weather.current.dewpoint < 70) return '(very muggy)';
+                  return '(oppressively muggy)';
+                })()
+              : ''}
+          </div>
+          <div>Feels like: {weather?.current.feelsLike ?? '--'}°F</div>
         </div>
-        <div>
-          Dew point: {weather?.current.dewpoint ?? '--'}°F{' '}
-          {weather
-            ? (() => {
-                if (weather.current.dewpoint < 50) return '';
-                if (weather.current.dewpoint < 60) return '(humid)';
-                if (weather.current.dewpoint < 65) return '(muggy)';
-                if (weather.current.dewpoint < 70) return '(very muggy)';
-                return '(oppressively muggy)';
-              })()
-            : ''}
-        </div>
-        <div>Feels like: {weather?.current.feelsLike ?? '--'}°F</div>
+        {weather?.current.icon.startsWith('https') ? (
+          weather.current.icon.includes('gstatic') ? (
+            <img src={weather.current.icon} width="96" height="96" />
+          ) : (
+            <a
+              href={
+                'https://github.com/calebegg/bright-earth/issues/new?title=' +
+                `Icon needs updating: ${weather.current.icon}&` +
+                `body=Find a suitable icon for ![](${weather.current.icon})` +
+                ' at https://fonts.google.com/icons'
+              }
+            >
+              <img src={weather?.current.icon} width="96" height="96" />
+            </a>
+          )
+        ) : (
+          <span style={{ width: '96px', height: '96px' }}>--</span>
+        )}
       </div>
     </div>
   );

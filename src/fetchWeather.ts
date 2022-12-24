@@ -46,6 +46,11 @@ export async function fetchWeather(
       feelsLike: +hourly.querySelector(
         'temperature[type="wind chill"] > value',
       )!.textContent!,
+      icon: convertIcon(
+        daily.querySelector(
+          'conditions-icon[type="forecast-NWS"][time-layout="k-p1h-n1-1"] > icon-link',
+        )!.textContent!,
+      ),
     },
 
     daily: getDailyData(daily),
@@ -138,6 +143,31 @@ function getDailyData(daily: Document): Weather['daily'] {
     }));
 }
 
+function convertIcon(url: string) {
+  const file = url.substring(
+    'https://forecast.weather.gov/newimages/medium/'.length,
+  );
+  const icon = file.substring(0, file.length - 4);
+  const mapped = ICON_MAP.get(icon);
+  if (mapped) {
+    return `https://www.gstatic.com/images/icons/material/system_gm/svg/${mapped}_24px.svg`;
+  } else {
+    return url;
+  }
+}
+
+// From: https://forecast.weather.gov/newimages/medium/few.png
+// To: https://www.gstatic.com/images/icons/material/system_gm/svg/partly_cloudy_day_24px.svg
+const ICON_MAP = new Map([
+  ['bkn', 'cloudy'],
+  ['few', 'partly_cloudy_day'],
+  ['nbkn', 'cloudy'],
+  ['nfew', 'partly_cloudy_night'],
+  ['nsct', 'partly_cloudy_night'],
+  ['sct', 'partly_cloudy_day'],
+  ['wind_sct', 'air'],
+]);
+
 export interface Weather {
   metadata: {
     created: Date;
@@ -157,6 +187,7 @@ export interface Weather {
     desc: string;
     dewpoint: number;
     feelsLike: number;
+    icon: string;
   };
   hourly: Array<{
     time: Date;
