@@ -16,7 +16,9 @@
  */
 
 // Janky DWML fetcher/parser
-export async function fetchWeather(position: Position): Promise<Weather> {
+export async function fetchWeather(
+  position: GeolocationPosition,
+): Promise<Weather> {
   const basePage = `https://forecast.weather.gov/MapClick.php?lat=${position.coords.latitude}&lon=${position.coords.longitude}`;
   const [hourlyXml, dailyXml] = await Promise.all([
     fetch(`${basePage}&FcstType=digitalDWML`).then(r => r.text()),
@@ -40,6 +42,9 @@ export async function fetchWeather(position: Position): Promise<Weather> {
         .getAttribute('weather-summary')!,
       dewpoint: +daily.querySelector(
         'temperature[type="dew point"][time-layout="k-p1h-n1-1"] > value',
+      )!.textContent!,
+      feelsLike: +hourly.querySelector(
+        'temperature[type="wind chill"] > value',
       )!.textContent!,
     },
 
@@ -151,6 +156,7 @@ export interface Weather {
     temp: number;
     desc: string;
     dewpoint: number;
+    feelsLike: number;
   };
   hourly: Array<{
     time: Date;

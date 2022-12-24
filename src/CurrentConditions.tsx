@@ -23,7 +23,7 @@ export function CurrentConditions({ weather }: { weather: Weather | null }) {
     <div className="current-conditions">
       <div className="temp">{weather?.current.temp ?? '--'}°</div>
       <div className="metadata">
-        <strong>{weather?.current.desc ?? ''}</strong>
+        <strong>{weather?.current.desc ?? '--'}</strong>
         <div>
           Wind:{' '}
           {'N,NNE,NE,ENE,E,ESE,SE,SSE,S,SSW,SW,WSW,W,WNW,NW,NNW,N'.split(',')[
@@ -42,6 +42,9 @@ export function CurrentConditions({ weather }: { weather: Weather | null }) {
                 return '(oppressively muggy)';
               })()
             : ''}
+        </div>
+        <div>
+          Feels like: {weather?.current.feelsLike ?? '--'}°F
         </div>
       </div>
     </div>
