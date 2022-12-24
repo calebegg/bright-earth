@@ -22,22 +22,22 @@ import { Weather, fetchWeather } from './fetchWeather';
 import { CurrentConditions } from './CurrentConditions';
 
 export function App() {
-  const [position, setPosition] = useState<Position | null>(null);
+  const [position, setPosition] = useState<GeolocationPosition | null>(null);
   const [weather, setWeather] = useState<Weather | null>(null);
 
   useEffect(() => {
     let canceled = false;
     (async () => {
       let posFromUrl = new URL(location.href).searchParams.get('loc');
-      let pos: Position | null;
+      let pos: GeolocationPosition | null;
       if (posFromUrl) {
         const [latitude, longitude] = posFromUrl.split(',').map(v => Number(v));
         pos = {
-          coords: { latitude, longitude } as Coordinates,
+          coords: { latitude, longitude } as GeolocationCoordinates,
           timestamp: Date.now(),
         };
       } else {
-        pos = await new Promise<Position>((resolve, reject) => {
+        pos = await new Promise<GeolocationPosition>((resolve, reject) => {
           navigator.geolocation.getCurrentPosition(resolve, reject);
         });
       }

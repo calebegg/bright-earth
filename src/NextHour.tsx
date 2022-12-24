@@ -27,7 +27,7 @@ export function NextHour({
   position,
   wind,
 }: {
-  position: Position | null;
+  position: GeolocationPosition | null;
   wind?: { dir: number; speed: number };
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -79,7 +79,7 @@ export function NextHour({
       c.imageSmoothingEnabled = false;
       c.translate(RETICLE_X, H / 2);
       c.scale(scale, scale);
-      c.rotate((-wind.dir / 360 - 0.25) * TAU);
+      c.rotate((-wind.dir / 360 - 0.75) * TAU);
       c.translate(-128, -128);
       c.drawImage(radar, 0, 0);
       c.resetTransform();
