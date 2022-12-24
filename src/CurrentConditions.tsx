@@ -35,7 +35,7 @@ export function CurrentConditions({ weather }: { weather: Weather | null }) {
           Dew point: {weather?.current.dewpoint ?? '--'}°F{' '}
           {weather
             ? (() => {
-                if (weather.current.dewpoint < 50) return '(dry)';
+                if (weather.current.dewpoint < 50) return '';
                 if (weather.current.dewpoint < 60) return '(humid)';
                 if (weather.current.dewpoint < 65) return '(muggy)';
                 if (weather.current.dewpoint < 70) return '(very muggy)';
