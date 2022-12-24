@@ -46,25 +46,25 @@ export function CurrentConditions({ weather }: { weather: Weather | null }) {
           </div>
           <div>Feels like: {weather?.current.feelsLike ?? '--'}°F</div>
         </div>
-        <div style={{display: 'flex', alignItems: 'center'}}>
-        {weather?.current.icon.startsWith('https') ? (
-          weather.current.icon.includes('gstatic') ? (
-            <img src={weather.current.icon} width="128" height="128" />
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          {weather?.current.icon.startsWith('https') ? (
+            weather.current.icon.includes('gstatic') ? (
+              <img src={weather.current.icon} width="128" height="128" />
+            ) : (
+              <a
+                href={
+                  'https://github.com/calebegg/bright-earth/issues/new?title=' +
+                  `Icon needs updating: ${weather.current.icon}&` +
+                  `body=Find a suitable icon for ![](${weather.current.icon})` +
+                  ' at https://fonts.google.com/icons'
+                }
+              >
+                <img src={weather?.current.icon} width="128" height="128" />
+              </a>
+            )
           ) : (
-            <a
-              href={
-                'https://github.com/calebegg/bright-earth/issues/new?title=' +
-                `Icon needs updating: ${weather.current.icon}&` +
-                `body=Find a suitable icon for ![](${weather.current.icon})` +
-                ' at https://fonts.google.com/icons'
-              }
-            >
-              <img src={weather?.current.icon} width="128" height="128" />
-            </a>
-          )
-        ) : (
-          <span style={{ width: '128px', height: '128px' }}>--</span>
-        )}
+            <span style={{ width: '128px', height: '128px' }}>--</span>
+          )}
         </div>
       </div>
     </div>
