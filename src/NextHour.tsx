@@ -20,8 +20,8 @@ import React, { useRef, useEffect, useState } from 'react';
 const TAU = Math.PI * 2;
 const W = Math.min(innerWidth, 590) * devicePixelRatio;
 const H = W / 4;
-const RETICLE_X = 15;
-const HOURS = 2;
+const RETICLE_X = 45;
+const HOURS = 1.25;
 
 export function NextHour({
   position,
