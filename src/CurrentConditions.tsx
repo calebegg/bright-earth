@@ -22,7 +22,7 @@ export function CurrentConditions({ weather }: { weather: Weather | null }) {
   return (
     <div className="current-conditions">
       <div className="temp">{weather?.current.temp ?? '--'}°</div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+      <div style={{ display: 'flex', alignItems: 'stretch', gap: '16px' }}>
         <div className="metadata">
           <strong>{weather?.current.desc ?? '--'}</strong>
           <div>
@@ -46,9 +46,10 @@ export function CurrentConditions({ weather }: { weather: Weather | null }) {
           </div>
           <div>Feels like: {weather?.current.feelsLike ?? '--'}°F</div>
         </div>
+        <div style={{display: 'flex', alignItems: 'center'}}>
         {weather?.current.icon.startsWith('https') ? (
           weather.current.icon.includes('gstatic') ? (
-            <img src={weather.current.icon} width="96" height="96" />
+            <img src={weather.current.icon} width="128" height="128" />
           ) : (
             <a
               href={
@@ -58,12 +59,13 @@ export function CurrentConditions({ weather }: { weather: Weather | null }) {
                 ' at https://fonts.google.com/icons'
               }
             >
-              <img src={weather?.current.icon} width="96" height="96" />
+              <img src={weather?.current.icon} width="128" height="128" />
             </a>
           )
         ) : (
-          <span style={{ width: '96px', height: '96px' }}>--</span>
+          <span style={{ width: '128px', height: '128px' }}>--</span>
         )}
+        </div>
       </div>
     </div>
   );
