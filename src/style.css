@@ -50,7 +50,7 @@ th {
 
 th,
 td {
-  padding: 0;
+  padding: 0 4px;
   border-bottom: solid rgba(0, 0, 0, 0.075) 1px;
 }
 
