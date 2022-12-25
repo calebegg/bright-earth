@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200;400&family=Roboto:wght@400&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;400&family=Roboto:wght@400&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
 html {
   font-size: min(max(3vw, 12px), calc(600px / 100 * 3));
@@ -41,7 +41,7 @@ main {
 }
 
 .current-conditions .temp {
-  font-weight: 200;
+  font-weight: 100;
   font-size: 6.5rem;
 }
 
