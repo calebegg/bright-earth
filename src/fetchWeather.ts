@@ -150,22 +150,21 @@ function convertIcon(url: string) {
   const icon = file.substring(0, file.length - 4);
   const mapped = ICON_MAP.get(icon);
   if (mapped) {
-    return `https://www.gstatic.com/images/icons/material/system_gm/svg/${mapped}_24px.svg`;
+    return mapped;
   } else {
     return url;
   }
 }
 
 // From: https://forecast.weather.gov/newimages/medium/few.png
-// To: https://www.gstatic.com/images/icons/material/system_gm/svg/partly_cloudy_day_24px.svg
 const ICON_MAP = new Map([
-  ['bkn', 'cloudy'],
-  ['few', 'partly_cloudy_day'],
-  ['nbkn', 'cloudy'],
-  ['nfew', 'partly_cloudy_night'],
-  ['nsct', 'partly_cloudy_night'],
-  ['sct', 'partly_cloudy_day'],
-  ['wind_sct', 'air'],
+  ['bkn', '\uf15b'],
+  ['few', '\uf172'],
+  ['nbkn', '\uf15b'],
+  ['nfew', '\uf174'],
+  ['nsct', '\uf174'],
+  ['sct', '\uf172'],
+  ['wind_sct', '\uefd8'],
 ]);
 
 export interface Weather {

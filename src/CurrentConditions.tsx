@@ -47,10 +47,8 @@ export function CurrentConditions({ weather }: { weather: Weather | null }) {
           <div>Feels like: {weather?.current.feelsLike ?? '--'}°F</div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          {weather?.current.icon.startsWith('https') ? (
-            weather.current.icon.includes('gstatic') ? (
-              <img src={weather.current.icon} width="128" height="128" />
-            ) : (
+          {weather?.current.icon ? (
+            weather.current.icon.includes('forecast.weather.gov') ? (
               <a
                 href={
                   'https://github.com/calebegg/bright-earth/issues/new?title=' +
@@ -60,11 +58,18 @@ export function CurrentConditions({ weather }: { weather: Weather | null }) {
                 }
                 target="_blank"
               >
-                <img src={weather?.current.icon} width="128" height="128" />
+                <img src={weather.current.icon} width="96" height="96" />
               </a>
+            ) : (
+              <span
+                className="material-symbols-outlined"
+                style={{ fontSize: '96px' }}
+              >
+                {weather.current.icon}
+              </span>
             )
           ) : (
-            <span style={{ width: '128px', height: '128px' }}>--</span>
+            <span style={{ width: '96px', height: '96px' }}>--</span>
           )}
         </div>
       </div>
