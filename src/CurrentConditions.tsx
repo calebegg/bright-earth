@@ -51,8 +51,8 @@ export function CurrentConditions({ weather }: { weather: Weather | null }) {
             weather.current.icon.includes('forecast.weather.gov') ? (
               <a
                 href={
-                  'https://github.com/calebegg/bright-earth/issues/new?title=' +
-                  `Icon needs updating: ${weather.current.icon}&` +
+                  'https://github.com/calebegg/bright-earth/issues/new?' +
+                  `title=Icon needs updating: ${weather.current.icon}&` +
                   `body=Find a suitable icon for ![](${weather.current.icon})` +
                   ' at https://fonts.google.com/icons'
                 }
@@ -69,7 +69,14 @@ export function CurrentConditions({ weather }: { weather: Weather | null }) {
               </span>
             )
           ) : (
-            <span style={{ width: '96px', height: '96px', fontSize: '96px' }}>
+            <span
+              style={{
+                width: '96px',
+                height: '96px',
+                fontSize: '96px',
+                fontWeight: 100,
+              }}
+            >
               --
             </span>
           )}
