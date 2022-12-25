@@ -16,11 +16,7 @@
  */
 
 import { setDefaultHandler, registerRoute } from 'workbox-routing';
-import {
-  NetworkFirst,
-  StaleWhileRevalidate,
-  CacheFirst,
-} from 'workbox-strategies';
+import { NetworkFirst, StaleWhileRevalidate } from 'workbox-strategies';
 
 setDefaultHandler(new NetworkFirst());
 
@@ -29,4 +25,4 @@ registerRoute('/', new StaleWhileRevalidate());
 registerRoute(/https:\/\/forecast.weather.gov\/.*/, new NetworkFirst());
 
 // Parcel hashed resources
-registerRoute(/\.[0-9a-f]{8}\./, new CacheFirst());
+registerRoute(/\.[0-9a-f]{8}\./, new StaleWhileRevalidate());
