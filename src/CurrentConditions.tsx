@@ -28,7 +28,7 @@ export function CurrentConditions({ weather }: { weather: Weather | null }) {
           <div>
             Wind:{' '}
             {'N,NNE,NE,ENE,E,ESE,SE,SSE,S,SSW,SW,WSW,W,WNW,NW,NNW,N'.split(',')[
-              Math.round((weather?.wind.dir ?? -1) / 22.5)
+              Math.round((weather?.wind.dir ?? -100) / 22.5)
             ] ?? '--'}
             , {weather?.wind.speed ?? '--'} mph
           </div>
@@ -63,13 +63,15 @@ export function CurrentConditions({ weather }: { weather: Weather | null }) {
             ) : (
               <span
                 className="material-symbols-outlined"
-                style={{ fontSize: '96px' }}
+                style={{ fontSize: '96px', width: '96px', height: '96px' }}
               >
                 {weather.current.icon}
               </span>
             )
           ) : (
-            <span style={{ width: '96px', height: '96px' }}>--</span>
+            <span style={{ width: '96px', height: '96px', fontSize: '96px' }}>
+              --
+            </span>
           )}
         </div>
       </div>
