@@ -160,9 +160,14 @@ function convertIcon(url: string) {
 const ICON_MAP = new Map([
   ['bkn', '\uf15b'],
   ['few', '\uf172'],
+  ['fg', '\ue818'],
   ['nbkn', '\uf15b'],
   ['nfew', '\uf174'],
+  ['novc', '\uf15b'],
+  ['nra', '\uf176'],
   ['nsct', '\uf174'],
+  ['ovc', '\uf15b'],
+  ['ra', '\uf176'],
   ['sct', '\uf172'],
   ['wind_sct', '\uefd8'],
 ]);
